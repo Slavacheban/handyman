@@ -10,40 +10,42 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class UserTransformer implements Transformer {
+public class UserTransformer implements Transformer<UserEntity, UserDTO> {
+
     @Override
-    public BaseDTO createDTO(BaseEntity baseEntity) {
-        UserEntity entity = (UserEntity) baseEntity;
-        return new UserDTO()
-                .setFirstName(entity.getFirstName())
-                .setLastName(entity.getLastName())
-                .setLogin(entity.getLogin())
-                .setPassword(entity.getPassword())
-                .setCreateDate(entity.getCreateDate())
-                .setUpdateDate(entity.getUpdateDate())
-                .setId(entity.getId());
+    public UserDTO createDTO(UserEntity entity) {
+        UserDTO dto = new UserDTO();
+        dto.setId(entity.getId());
+        dto.setFirstName(entity.getFirstName());
+        dto.setLastName(entity.getLastName());
+        dto.setLogin(entity.getLogin());
+        dto.setPassword(entity.getPassword());
+        dto.setCreateDate(entity.getCreateDate());
+        dto.setUpdateDate(entity.getUpdateDate());
+        return dto;
     }
 
     @Override
-    public BaseEntity createEntity(BaseDTO baseDto) {
-        UserDTO dto = (UserDTO) baseDto;
-        return new UserEntity().setFirstName(dto.getFirstName())
-                .setLastName(dto.getLastName())
-                .setLogin(dto.getLogin())
-                .setPassword(dto.getPassword())
-                .setRole(dto.getRole())
-                .setId(dto.getId())
-                .setCreateDate(dto.getCreateDate())
-                .setUpdateDate(dto.getUpdateDate());
+    public UserEntity createEntity(UserDTO dto) {
+        UserEntity entity = new UserEntity();
+        entity.setId(dto.getId());
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+        entity.setLogin(dto.getLogin());
+        entity.setPassword(dto.getPassword());
+        entity.setRole(dto.getRole());
+        entity.setCreateDate(dto.getCreateDate());
+        entity.setUpdateDate(dto.getUpdateDate());
+        return entity;
     }
 
     @Override
-    public List<BaseDTO> createDTOList(List<BaseEntity> entityList) {
+    public List<UserDTO> createDTOList(List<UserEntity> entityList) {
         return entityList.stream().map(this::createDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<BaseEntity> createEntityList(List<BaseDTO> dtoList) {
-        return dtoList.stream().map(this::createEntity).collect(Collectors.toList());
+    public List<UserEntity> createEntityList(List<UserDTO> userDTOS) {
+        return userDTOS.stream().map(this::createEntity).collect(Collectors.toList());
     }
 }

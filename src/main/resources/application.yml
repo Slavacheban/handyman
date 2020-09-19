@@ -14,14 +14,14 @@ spring:
     show-sql: true
   profiles:
     active: prod
-
-logging:
-  level:
-    ROOT: ERROR
-    org.springframework: ERROR
-    org.springframework.data: ERROR
-    ru.leodev: INFO
-    org.postgresql: ERROR
-  file:
-    name: /Users/leo/app.log
+#
+#logging:
+#  level:
+#    ROOT: ERROR
+#    org.springframework: ERROR
+#    org.springframework.data: ERROR
+#    ru.leodev: INFO
+#    org.postgresql: ERROR
+#  file:
+#    name: /Users/leo/app.log
 
