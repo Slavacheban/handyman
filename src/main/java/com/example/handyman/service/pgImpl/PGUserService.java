@@ -16,6 +16,6 @@ public class PGUserService implements UserService {
 
     @Override
     public UserEntity getUserById(Long id) {
-       return userDAO.getOne(id);
+        return userDAO.getOne(id);
     }
 }

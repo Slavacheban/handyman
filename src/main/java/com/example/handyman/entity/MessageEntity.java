@@ -2,22 +2,17 @@ package com.example.handyman.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Getter
-@Setter
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "message")
-@Accessors(chain = true)
 public class MessageEntity extends BaseEntity {
     @Column(name = "from_user_id")
     private Long fromUserId;

@@ -2,7 +2,6 @@ package com.example.handyman.entity;
 
 import com.example.handyman.entity.listeners.DateEntityListener;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -14,7 +13,6 @@ import java.util.Date;
 
 @Data
 @MappedSuperclass
-@Accessors(chain = true)
 @EntityListeners(value = DateEntityListener.class)
 public abstract class BaseEntity {
 
