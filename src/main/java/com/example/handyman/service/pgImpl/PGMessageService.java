@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PGMessageService implements MessageService {
-    MessageDAO messageDAO;
+    private MessageDAO messageDAO;
 
     @Override
     public MessageEntity getMessageById(Long id) {

@@ -17,8 +17,8 @@ import java.util.List;
 @RequestMapping("/messages")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class MessageController {
-    MessageService messageService;
-    MessageTransformer messageTransformer;
+    private MessageService messageService;
+    private MessageTransformer messageTransformer;
 
     @GetMapping("/{fromId}/{toId}")
     public List<MessageDTO> getMessageList(@PathVariable Long fromId, @PathVariable Long toId) {

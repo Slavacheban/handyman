@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Data
@@ -14,10 +16,12 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Table(name = "message")
 public class MessageEntity extends BaseEntity {
-    @Column(name = "from_user_id")
-    private Long fromUserId;
-    @Column(name = "to_user_id")
-    private Long toUserId;
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    private UserEntity fromUser;
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    private UserEntity toUser;
     @Column(name = "is_edited")
     private boolean isEdited;
     @Column(name = "content")

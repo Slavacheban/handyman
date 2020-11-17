@@ -8,6 +8,8 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Log4j
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -17,5 +19,10 @@ public class PGUserService implements UserService {
     @Override
     public UserEntity getUserById(Long id) {
         return userDAO.getOne(id);
+    }
+
+    @Override
+    public List<UserEntity> getAll() {
+        return userDAO.findAll();
     }
 }
