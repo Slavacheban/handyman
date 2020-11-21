@@ -32,8 +32,8 @@ public class UserEntity extends BaseEntity {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "customer")
-    @Fetch(FetchMode.SELECT)
-    private List<OrderEntity> orders;
+//    @OneToMany(mappedBy = "customer")
+//    @Fetch(FetchMode.SELECT)
+//    private List<OrderEntity> orders;
 }
 

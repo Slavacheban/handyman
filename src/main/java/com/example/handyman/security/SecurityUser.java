@@ -27,17 +27,17 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return login;
     }
 
     @Override
@@ -61,6 +61,6 @@ public class SecurityUser implements UserDetails {
     }
 
     public static UserDetails fromUser(UserEntity userEntity) {
-        return new User(userEntity.getLogin(), userEntity.getPassword(), userEntity.getRole().getAuthorities());
+        return new User(userEntity.getLogin(), userEntity.getPassword(), true, true, true, true, userEntity.getRole().getAuthorities());
     }
 }
