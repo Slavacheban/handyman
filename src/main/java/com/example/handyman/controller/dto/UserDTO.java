@@ -1,6 +1,7 @@
 package com.example.handyman.controller.dto;
 
 import com.example.handyman.entity.enums.Role;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO extends BaseDTO{
     @Size(min=2, max=30)
     private String firstName;

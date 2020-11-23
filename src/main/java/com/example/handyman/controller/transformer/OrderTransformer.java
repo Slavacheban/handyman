@@ -15,7 +15,7 @@ public class OrderTransformer extends Transformer<OrderEntity, OrderDTO> {
 
     public OrderDTO createDTO(OrderEntity entity) {
         OrderDTO dto = new OrderDTO();
-        dto.setCustomer(userTransformer.createDTO(entity.getCustomer()));
+//        dto.setCustomer(userTransformer.createDTO(entity.getCustomer()));
         dto.setDescription(entity.getDescription());
         dto.setStartDate(entity.getStartDate());
         dto.setFinishDate(entity.getFinishDate());
@@ -29,7 +29,7 @@ public class OrderTransformer extends Transformer<OrderEntity, OrderDTO> {
     @Override
     public OrderEntity createEntity(OrderDTO dto) {
         OrderEntity entity = new OrderEntity();
-        entity.setCustomer(userTransformer.createEntity(dto.getCustomer()));
+//        entity.setCustomer(userTransformer.createEntity(dto.getCustomer()));
         entity.setDescription(dto.getDescription());
         entity.setStartDate(dto.getStartDate());
         entity.setFinishDate(dto.getFinishDate());

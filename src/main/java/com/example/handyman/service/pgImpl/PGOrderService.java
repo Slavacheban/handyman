@@ -16,7 +16,9 @@ public class PGOrderService implements OrderService {
 
     @Override
     public OrderEntity getOrderById(Long id) {
-        return orderDAO.getOne(id);
+        OrderEntity orderEntity = orderDAO.getOne(id);
+        log.info(orderEntity);
+        return orderEntity;
     }
 
     @Override
