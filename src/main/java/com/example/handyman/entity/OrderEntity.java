@@ -23,10 +23,10 @@ import java.util.Date;
 @Table(name = "order")
 public class OrderEntity extends BaseEntity {
 
-//    @ManyToOne
-//    private UserEntity customer;
-//    @ManyToOne
-//    private UserEntity handymen;
+    @ManyToOne
+    private UserEntity customer;
+    @ManyToOne
+    private UserEntity handymen;
     @Column(name = "price")
     private BigDecimal price;
     @Column(name = "description")
