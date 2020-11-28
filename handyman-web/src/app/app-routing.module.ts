@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
       {path: '', redirectTo: '/orders', pathMatch: 'full', canActivate: [AuthGuard]},
-      {path: 'handyman', component: HandymanListPageComponent, canActivate: [AuthGuard]},
+      {path: 'handyman', component: HandymanListPageComponent},
       {path: 'orders', component: OrderListPageComponent, canActivate: [AuthGuard]},
       {path: 'login', component: LoginPageComponent},
     ]

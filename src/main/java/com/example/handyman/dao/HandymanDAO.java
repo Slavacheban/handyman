@@ -7,5 +7,5 @@ import java.util.Date;
 import java.util.List;
 
 public interface HandymanDAO extends JpaRepository<HandymanEntity, Long> {
-    List<HandymanEntity> getAllByCreateDateBefore(Date date);
+    List<HandymanEntity> findAll();
 }

@@ -27,6 +27,11 @@ public class PGHandymanService implements HandymanService {
 
     @Override
     public List<HandymanEntity> getAllHandyman() {
-        return handymanDAO.getAllByCreateDateBefore(new Date());
+        return handymanDAO.findAll();
+    }
+
+    @Override
+    public HandymanEntity addHandyman(HandymanEntity handymanEntity) {
+        return handymanDAO.save(handymanEntity);
     }
 }

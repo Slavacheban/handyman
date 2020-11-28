@@ -11,6 +11,7 @@ import {HandymanListPageComponent} from './handyman-list-page/handyman-list-page
 import {LoginPageComponent} from './login-page/login-page.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 @NgModule({
   declarations: [
@@ -22,12 +23,13 @@ import {HttpClientModule} from "@angular/common/http";
     HandymanListPageComponent,
     LoginPageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        NgxDatatableModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

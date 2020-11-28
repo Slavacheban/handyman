@@ -1,18 +1,18 @@
 package com.example.handyman.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.example.handyman.controller.dto.UserDTO;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/auth")
-@CrossOrigin(origins = "http://192.168.0.102:4201", maxAge = 3600)
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+
+@RestController
+@CrossOrigin
 public class AuthController {
 
-    @GetMapping("/login")
-    public String getLoginPage() {
-        return "login";
+    @PostMapping("/login")
+    public boolean getLoginPage(@RequestBody UserDTO userDTO) {
+        return true; //todo
     }
 
     @GetMapping("/success")

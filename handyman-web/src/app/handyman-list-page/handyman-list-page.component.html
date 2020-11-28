@@ -1,2 +1,39 @@
-<div></div>
-<div *ngFor="let handyman of handymanList">{{handyman.name}}</div>
+<div>
+  <ngx-datatable
+    #table
+    class="bootstrap"
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="30"
+    [rowHeight]="'auto'"
+    [limit]="13"
+    [rows]="handymanList"
+    [columns]="columns">
+  </ngx-datatable>
+  <ng-template #dateTemplate let-row="row" let-value="value">
+    <span>{{value | date: 'short'}}</span>
+  </ng-template>
+  <ng-template #actionsTemplate let-row="row" let-value="value">
+    <div *ngIf="row.id" class="btn-group w-100" dropdown container="body">
+      <button id="button-basic" dropdownToggle type="button"
+              class="btn btn-primary dropdown-toggle btn-sm rounded-0"
+              aria-controls="dropdown-basic"> Actions <span class="caret"></span>
+      </button>
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+          role="menu" aria-labelledby="button-basic">
+        <li style="cursor: pointer" role="menuitem" class="dropdown-item"
+            (click)="updateHandyman(row)">
+          <span><i class="fa fa-thumb-tack"></i> Update Handyman</span>
+        </li>
+        <li style="cursor: pointer" role="menuitem" class="dropdown-item"
+            (click)="addHandyman()">
+          <span><i class="fa fa-thumb-tack"></i>Add Handyman</span>
+        </li>
+        <li style="cursor: pointer" role="menuitem" class="dropdown-item"
+            (click)="deleteHandyman(row)">
+          <span><i class="fa fa-thumb-tack"></i>Delete Handyman</span>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
+</div>

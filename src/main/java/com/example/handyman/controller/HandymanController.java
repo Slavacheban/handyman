@@ -6,9 +6,7 @@ import com.example.handyman.entity.HandymanEntity;
 import com.example.handyman.service.HandymanService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,8 +18,16 @@ public class HandymanController {
     private HandymanService handymanService;
     private HandymanTransformer handymanTransformer;
 
-    @GetMapping("/")
+    @GetMapping
+    @CrossOrigin
     public List<HandymanDTO> getHandymanList() {
         return handymanTransformer.createDTOList(handymanService.getAllHandyman());
+    }
+
+    @PostMapping
+    @CrossOrigin
+    public HandymanDTO addHandyman(@RequestBody HandymanDTO handymanDTO) {
+        HandymanEntity handymanEntity = handymanService.addHandyman(handymanTransformer.createEntity(handymanDTO));
+        return handymanTransformer.createDTO(handymanEntity);
     }
 }
