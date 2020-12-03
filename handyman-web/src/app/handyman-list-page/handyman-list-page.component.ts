@@ -1,6 +1,9 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Handyman} from '../shared/entities/handyman';
 import {HandymanService} from "../shared/services/handyman-service";
+import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
+import {ViewHandymanModalComponent} from "../view-handyman-modal/view-handyman-modal.component";
+import {DatatableComponent} from "@swimlane/ngx-datatable";
 
 @Component({
   selector: 'app-handyman-list-page',
@@ -10,30 +13,32 @@ import {HandymanService} from "../shared/services/handyman-service";
 export class HandymanListPageComponent implements OnInit {
 
   public handymanList: Handyman[];
-  public columns: string [];
+  public dtColumns;
+  private bsModalRef: BsModalRef;
 
+  @ViewChild('table') table: DatatableComponent;
   @ViewChild('dateTemplate') dateTemplate: TemplateRef<any>;
   @ViewChild('actionsTemplate') actionsTemplate: TemplateRef<any>;
 
 
-  constructor(private handymanService: HandymanService) { }
+  constructor(private handymanService: HandymanService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
-
-    this.columns = this.prepareDataTableColumns();
-    this.getHandymanList().then((list => {
-      this.handymanList = list;
-    }));
+    this.dtColumns = this.prepareDataTableColumns();
+    this.refreshTable();
   }
 
-  private async getHandymanList() {
-    return this.handymanService.getHandymanList();
+  private refreshTable() {
+    this.handymanService.getHandymanList().then(list => {
+      this.handymanList = this.prepareHandyman(list);
+    });
   }
 
   private prepareDataTableColumns(): any[] {
     return [
       {prop: 'id', name: 'ID'},
-      {prop: 'name', name: 'Handyman Name'},
+      {prop: 'userDTO.firstName', name: 'Handyman Name'},
       {prop: 'createDate', name: 'Create Date', cellTemplate: this.dateTemplate},
       {
         prop: 'actions',
@@ -51,10 +56,31 @@ export class HandymanListPageComponent implements OnInit {
   }
 
   public addHandyman() {
+    const initialState = {
+      id: null,
+      callback: (result) => {
+        if (result) {
+          this.refreshTable();
+        }
+      }
+    };
 
+    const modalConfig = {
+      class: 'modal-md',
+      ignoreBackdropClick: true
+    };
+    const modalParams = Object.assign({}, modalConfig, {initialState});
+    this.bsModalRef = this.modalService.show(ViewHandymanModalComponent, modalParams);
   }
 
   public deleteHandyman(handyman: Handyman) {
 
+  }
+
+  private prepareHandyman(list: Handyman[]) {
+    list.forEach((handyman: Handyman) => {
+      handyman._name = handyman.userDTO ? handyman.userDTO.firstName + ' ' + handyman.userDTO.lastName : 'no name';
+    });
+    return list;
   }
 }

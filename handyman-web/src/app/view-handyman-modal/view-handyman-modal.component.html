@@ -1,9 +1,25 @@
-<div class="handyman">
-  <div class="header">
-    <h1>Handyman title</h1>
-  </div>
-  <div class="info">
-    <strong>Имя</strong>
-    <small>статус</small>
-  </div>
+<div class="modal-header">
+  <h4 class="modal-title">
+    <span>{{id ? 'Edit' : 'Create'}}</span> Handyman</h4>
+</div>
+<div class="modal-body">
+  <form [formGroup]="handymanForm">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="col-form-label-sm">Name <span class="required-field">*</span></label>
+          <input type="text"
+                 formControlName="name"
+                 class="form-control form-control-sm"
+                 [(ngModel)]="handyman._name">
+        </div>
+      </div>
+    </div>
+      </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-sm btn-primary" (click)="save()"
+          [disabled]="handymanForm.invalid">Save
+  </button>
+  <button type="button" class="btn btn-sm btn-warning" (click)="close()">Cancel</button>
 </div>

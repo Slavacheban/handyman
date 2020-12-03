@@ -9,12 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class HandymanTransformer extends Transformer<HandymanEntity, HandymanDTO> {
+
+    private UserTransformer userTransformer;
+
     @Override
     public HandymanDTO createDTO(HandymanEntity entity) {
         HandymanDTO handymanDTO = new HandymanDTO();
         handymanDTO.setCreateDate(entity.getCreateDate());
         handymanDTO.setUpdateDate(entity.getUpdateDate());
         handymanDTO.setId(entity.getId());
+        if (entity.getUser() != null) {
+            handymanDTO.setUserDTO(userTransformer.createDTO(entity.getUser()));
+        }
         return handymanDTO;
     }
 

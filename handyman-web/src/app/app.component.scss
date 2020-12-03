@@ -1,0 +1,13 @@
+.required-field {
+  color: #f00;
+}
+.modal-header {
+  background: #343c49;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.1rem 0.1rem 0 0 !important;
+}
+.cash-tables-wrapper{
+  height:calc(100% - 80px);
+  overflow:auto;
+}

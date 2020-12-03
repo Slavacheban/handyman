@@ -1,39 +1,47 @@
-<div>
-  <ngx-datatable
-    #table
-    class="bootstrap"
-    [columnMode]="'force'"
-    [headerHeight]="30"
-    [footerHeight]="30"
-    [rowHeight]="'auto'"
-    [limit]="13"
-    [rows]="handymanList"
-    [columns]="columns">
-  </ngx-datatable>
-  <ng-template #dateTemplate let-row="row" let-value="value">
-    <span>{{value | date: 'short'}}</span>
-  </ng-template>
-  <ng-template #actionsTemplate let-row="row" let-value="value">
-    <div *ngIf="row.id" class="btn-group w-100" dropdown container="body">
-      <button id="button-basic" dropdownToggle type="button"
-              class="btn btn-primary dropdown-toggle btn-sm rounded-0"
-              aria-controls="dropdown-basic"> Actions <span class="caret"></span>
-      </button>
-      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-          role="menu" aria-labelledby="button-basic">
-        <li style="cursor: pointer" role="menuitem" class="dropdown-item"
-            (click)="updateHandyman(row)">
-          <span><i class="fa fa-thumb-tack"></i> Update Handyman</span>
-        </li>
-        <li style="cursor: pointer" role="menuitem" class="dropdown-item"
+<div class="row">
+  <div class="col-10"></div>
+  <div class="col-2">
+    <button type="button"
+            class="btn btn-block btn-sm btn-success"
             (click)="addHandyman()">
-          <span><i class="fa fa-thumb-tack"></i>Add Handyman</span>
-        </li>
-        <li style="cursor: pointer" role="menuitem" class="dropdown-item"
-            (click)="deleteHandyman(row)">
-          <span><i class="fa fa-thumb-tack"></i>Delete Handyman</span>
-        </li>
-      </ul>
-    </div>
-  </ng-template>
+      Create Handyman
+    </button>
+  </div>
+</div>
+<div class="row cash-tables-wrapper">
+  <div class="col">
+    <ngx-datatable
+      #table
+      class="bootstrap"
+      [columnMode]="'force'"
+      [headerHeight]="30"
+      [footerHeight]="30"
+      [rowHeight]="'auto'"
+      [limit]="30"
+      [rows]="handymanList"
+      [columns]="dtColumns">
+    </ngx-datatable>
+
+    <ng-template #dateTemplate let-row="row" let-value="value">
+      {{value | date}}
+    </ng-template>
+    <ng-template #actionsTemplate let-row="row" let-value="value">
+      <div class="btn-group w-100" dropdown container="body">
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle btn-sm rounded-0"
+                aria-controls="dropdown-basic">
+          Actions <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic">
+          <li role="menuitem" class="dropdown-item" (click)="updateHandyman(row)">
+            <span><i class="fa fa-sliders"></i>Update Handyman</span>
+          </li>
+          <li role="menuitem" class="dropdown-item" (click)="deleteHandyman(row)">
+            <span><i class="fa fa-pencil-square-o"></i> Delete Handyman</span>
+          </li>
+        </ul>
+      </div>
+    </ng-template>
+
+  </div>
 </div>

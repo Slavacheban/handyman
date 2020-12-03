@@ -12,6 +12,9 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import {ModalModule} from "ngx-bootstrap/modal";
+import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -23,14 +26,16 @@ import {NgxDatatableModule} from "@swimlane/ngx-datatable";
     HandymanListPageComponent,
     LoginPageComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        NgxDatatableModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgxDatatableModule,
+    ModalModule.forRoot(),
+    BsDropdownModule.forRoot(),
+  ],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

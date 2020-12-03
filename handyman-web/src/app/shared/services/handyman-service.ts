@@ -21,4 +21,8 @@ export class HandymanService extends HttpBase {
   public async getHandymanList(): Promise<Handyman[]> {
     return super.getAll(this.URL, Handyman, {}).toPromise();
   }
+
+  public async addHandyman(handyman: Handyman): Promise<Handyman> {
+    return super.postForResult(this.URL, Handyman, {}, handyman).toPromise();
+  }
 }
