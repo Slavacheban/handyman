@@ -15,6 +15,7 @@ import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {ModalModule} from "ngx-bootstrap/modal";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import {DatePipe} from "@angular/common";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {DatePipe} from "@angular/common";
     NgxDatatableModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

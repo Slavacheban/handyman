@@ -1,6 +1,6 @@
-package com.example.handyman.controller;
+package com.example.handyman.entity;
 
-import com.example.handyman.exceptions.ThereIsNoSuchUserException;
+import com.example.handyman.exception.ThereIsNoSuchUserException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;

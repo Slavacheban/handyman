@@ -8,6 +8,8 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Log4j
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -29,5 +31,10 @@ public class PGOrderService implements OrderService {
     @Override
     public void deleteOrderById(Long id) {
         orderDAO.deleteById(id);
+    }
+
+    @Override
+    public List<OrderEntity> getAllOrders() {
+        return orderDAO.findAll();
     }
 }

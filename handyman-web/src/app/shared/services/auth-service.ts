@@ -4,11 +4,12 @@ import {Observable} from 'rxjs';
 import {User} from "../entities/user";
 import {Constants} from "../constants/app.constants";
 import {HttpBase} from "./http-base";
+import {tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends HttpBase{
+export class AuthService extends HttpBase {
   readonly ARI_URL;
 
   constructor(http: HttpClient,
@@ -18,11 +19,14 @@ export class AuthService extends HttpBase{
   }
 
   get token(): string {
-    return ''
+    return localStorage.getItem('sss');
   }
 
   login(user: User): Observable<any> {
-    return super.post(this.ARI_URL + 'login/', User, {}, user)
+    return super.post(this.ARI_URL + 'login', User, {}, user)
+      .pipe(
+        tap(this.setToken)
+      );
   }
 
   logout() {
@@ -33,7 +37,7 @@ export class AuthService extends HttpBase{
     return !!this.token
   }
 
-  private setToken() {
-
+  private setToken(resp: string) {
+    localStorage.setItem('sss', resp);
   }
 }

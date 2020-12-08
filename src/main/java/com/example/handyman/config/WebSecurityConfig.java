@@ -1,11 +1,10 @@
 package com.example.handyman.config;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -20,57 +19,66 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalAuthentication
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    //    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(daoAuthenticationProvider());
-//    }
+    @Autowired
+    public WebSecurityConfig(@Qualifier("pdUserDetailsService") UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("slavacheban22@gmail.com")
-                .password("slava04")
-                .roles("ADMIN");
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
+        http
 //                .csrf().disable()
-//                .cors(Customizer.withDefaults())
+                .cors().and()
+
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin();
+
+
 //                .authorizeRequests()
-//                .antMatchers("/").permitAll()
+//                .antMatchers("/", "/logout", "/login", "/main.*", "/vendor.*", "/styles.*", "/runtime.*", "/polyfills.*", "/index.html", "/favicon.ico").permitAll()
+//                .antMatchers("/logout").permitAll()
 //                .anyRequest()
 //                .authenticated()
 //                .and()
 //                .formLogin()
-//                .loginPage("/auth/login").permitAll()
+//                .loginPage("http://localhost:4200/login").permitAll();
 //                .defaultSuccessUrl("/auth/success")
 //                .and()
 //                .logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/")
+////                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
 //                .invalidateHttpSession(true)
 //                .clearAuthentication(true)
 //                .deleteCookies("JSESSIONID")
-//                .logoutSuccessUrl("/auth/login");
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/handyman").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
+////                .logoutSuccessUrl("/login");
+////        http.csrf().disable()
+////                .authorizeRequests()
+////                .antMatchers("/handyman").permitAll()
+////                .anyRequest()
+////                .authenticated()
+//                .and()
+//                .httpBasic();
     }
 
 
@@ -86,14 +94,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         return daoAuthenticationProvider;
     }
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("https://192.168.0.102:4201"));
-//        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(new ArrayList<>(Collections.singletonList("*")));
+        configuration.setAllowedMethods(new ArrayList<>(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH")));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(new ArrayList<>(Arrays.asList("Authorization", "Cache-Control", "Content-Type")));
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
 }

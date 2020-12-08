@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("pdUserDetailsService")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PGUserDetailsService implements UserDetailsService {
 

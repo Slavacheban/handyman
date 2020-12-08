@@ -1,1 +1,45 @@
-order list
+<div class="row">
+  <div class="col-10"></div>
+  <div class="col-2">
+
+  </div>
+</div>
+<div class="row cash-tables-wrapper">
+  <div class="col">
+    <ngx-datatable
+      #table
+      class="bootstrap"
+      [columnMode]="'force'"
+      [headerHeight]="30"
+      [footerHeight]="30"
+      [rowHeight]="'auto'"
+      [limit]="30"
+      [rows]="orderList"
+      [columns]="dtColumns">
+    </ngx-datatable>
+
+    <ng-template #dateTemplate let-row="row" let-value="value">
+      {{value | date}}
+    </ng-template>
+    <ng-template #currencyTemplate let-row="row" let-value="value">
+      {{value | currency}}
+    </ng-template>
+    <ng-template #actionsTemplate let-row="row" let-value="value">
+      <div class="btn-group w-100" dropdown container="body">
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle btn-sm rounded-0"
+                aria-controls="dropdown-basic">
+          Actions <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic">
+          <li role="menuitem" class="dropdown-item" (click)="updateOrder(row)">
+            <span><i class="fa fa-sliders"></i>Update Order</span>
+          </li>
+<!--          <li role="menuitem" class="dropdown-item" (click)="deleteOrder(row)">-->
+<!--            <span><i class="fa fa-pencil-square-o"></i> Delete Order</span>-->
+<!--          </li>-->
+        </ul>
+      </div>
+    </ng-template>
+  </div>
+</div>

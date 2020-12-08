@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Handyman} from '../shared/entities/handyman';
 import {HandymanService} from "../shared/services/handyman-service";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
@@ -10,7 +10,7 @@ import {DatatableComponent} from "@swimlane/ngx-datatable";
   templateUrl: './handyman-list-page.component.html',
   styleUrls: ['./handyman-list-page.component.scss']
 })
-export class HandymanListPageComponent implements OnInit {
+export class HandymanListPageComponent implements AfterViewInit {
 
   public handymanList: Handyman[];
   public dtColumns;
@@ -24,9 +24,12 @@ export class HandymanListPageComponent implements OnInit {
   constructor(private handymanService: HandymanService,
               private modalService: BsModalService) { }
 
-  ngOnInit() {
-    this.dtColumns = this.prepareDataTableColumns();
-    this.refreshTable();
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.dtColumns = this.prepareDataTableColumns();
+      this.refreshTable();
+    }, 0)
   }
 
   private refreshTable() {

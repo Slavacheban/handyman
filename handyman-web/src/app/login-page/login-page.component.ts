@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
       ]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(4)
       ])
     });
   }
@@ -39,9 +39,10 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.auth.login(this.user).subscribe(() => {
+    this.auth.login(this.user).subscribe((resp) => {
+      console.log("slava", resp);
       this.form.reset();
-      this.router.navigate(['/order', '1']);
+      this.router.navigate(['/orders']);
     })
   }
 }

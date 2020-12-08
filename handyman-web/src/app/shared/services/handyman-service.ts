@@ -15,7 +15,7 @@ export class HandymanService extends HttpBase {
   constructor(httpClient: HttpClient,
               constants: Constants) {
     super(httpClient);
-    this.URL = constants.API_URL + 'handyman'; //todo check
+    this.URL = constants.API_URL + 'handyman';
   }
 
   public async getHandymanList(): Promise<Handyman[]> {
