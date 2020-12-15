@@ -1,18 +1,10 @@
 package com.example.handyman.entity;
 
-import com.example.handyman.entity.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -21,19 +13,26 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
+
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "login", nullable = false, unique = true)
     private String login;
+
     @Column(name = "password")
     private String password;
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private Role role;
-//    @OneToMany(mappedBy = "customer")
-//    @Fetch(FetchMode.SELECT)
-//    private List<OrderEntity> orders;
+
+    @Column(name = "status")
+    private String status;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+        inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    private List<Role> roles;
 }
 

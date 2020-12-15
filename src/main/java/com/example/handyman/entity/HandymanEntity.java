@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HandymanEntity extends BaseEntity {
+
     @Fetch(FetchMode.JOIN)
     @OneToOne
     private UserEntity user;

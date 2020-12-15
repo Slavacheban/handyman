@@ -16,14 +16,18 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Table(name = "message")
 public class MessageEntity extends BaseEntity {
+
     @ManyToOne
     @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     private UserEntity fromUser;
+
     @ManyToOne
     @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     private UserEntity toUser;
+
     @Column(name = "is_edited")
     private boolean isEdited;
+
     @Column(name = "content")
     private String content;
 }

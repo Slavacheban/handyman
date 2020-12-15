@@ -23,7 +23,7 @@ export class AuthService extends HttpBase {
   }
 
   login(user: User): Observable<any> {
-    return super.post(this.ARI_URL + 'login', User, {}, user)
+    return super.post(this.ARI_URL + 'auth/login', User, {}, user)
       .pipe(
         tap(this.setToken)
       );

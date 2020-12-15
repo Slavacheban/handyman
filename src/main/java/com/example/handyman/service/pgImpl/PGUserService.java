@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Log4j
 @Service
@@ -24,5 +25,10 @@ public class PGUserService implements UserService {
     @Override
     public List<UserEntity> getAll() {
         return userDAO.findAll();
+    }
+
+    @Override
+    public Optional<UserEntity> getUserByLogin(String login) {
+        return userDAO.getUserEntitiesByLogin(login);
     }
 }

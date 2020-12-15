@@ -25,16 +25,22 @@ public class OrderEntity extends BaseEntity {
 
     @ManyToOne
     private UserEntity customer;
+
     @ManyToOne
     private UserEntity handymen;
+
     @Column(name = "price")
     private BigDecimal price;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "start_date")
     private Date startDate;
+
     @Column(name = "finish_date")
     private Date finishDate;
+
     @Column(name = "result")
     @Enumerated(EnumType.STRING)
     private OrderResult result;

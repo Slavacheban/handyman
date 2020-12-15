@@ -1,29 +1,19 @@
 package com.example.handyman.security;
 
-import com.example.handyman.entity.UserEntity;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-@Data
+@AllArgsConstructor
 public class SecurityUser implements UserDetails {
 
     private final String login;
     private final String password;
-    private final List<SimpleGrantedAuthority> authorities;
+    private final List<GrantedAuthority> authorities;
     private final boolean isActive;
-
-    public SecurityUser(String login, String password, List<SimpleGrantedAuthority> authorities, boolean isActive) {
-        this.login = login;
-        this.password = password;
-        this.authorities = authorities;
-        this.isActive = isActive;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -58,9 +48,5 @@ public class SecurityUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isActive;
-    }
-
-    public static UserDetails fromUser(UserEntity userEntity) {
-        return new User(userEntity.getLogin(), userEntity.getPassword(), true, true, true, true, userEntity.getRole().getAuthorities());
     }
 }

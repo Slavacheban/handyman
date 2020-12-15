@@ -7,7 +7,7 @@ import {GlobalJavaConstants} from "./global-java-constants";
 
 export class Constants {
 
-  public API_URL: string = 'http://localhost:8080/';
+  public API_URL: string = 'http://localhost:8080/api/';
 
   // private getUrl() {
   //   return new GlobalJavaConstants().APP_HANDYMAN_LINK;

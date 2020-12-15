@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/handyman")
+@RequestMapping("/api/handyman")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class HandymanController {
 

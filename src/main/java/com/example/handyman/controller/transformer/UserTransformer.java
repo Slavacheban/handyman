@@ -14,7 +14,7 @@ public class UserTransformer extends Transformer<UserEntity, UserDTO> {
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setLogin(entity.getLogin());
-        dto.setRole(entity.getRole());
+        dto.setRoles(entity.getRoles());
         dto.setCreateDate(entity.getCreateDate());
         dto.setUpdateDate(entity.getUpdateDate());
         return dto;
@@ -27,7 +27,7 @@ public class UserTransformer extends Transformer<UserEntity, UserDTO> {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setLogin(dto.getLogin());
-        entity.setRole(dto.getRole());
+        entity.setRoles(dto.getRoles());
         entity.setCreateDate(dto.getCreateDate());
         entity.setUpdateDate(dto.getUpdateDate());
         return entity;
